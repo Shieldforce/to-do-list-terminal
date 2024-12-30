@@ -95,18 +95,20 @@ if [[ "$resposta_1" =~ ^[Ss]$ ]]; then
     if [[ "$(basename "$current_dir")" == "$expected_dir" ]]; then
         info "Você já está dentro do diretório '$expected_dir'. Pulando clonagem."
         git reset --hard
-        git pull --allow-unrelated-histories || {
+        if ! git pull --allow-unrelated-histories; then
             error "Conflitos detectados. Sobrescrevendo com as alterações do repositório remoto."
-            git merge -X theirs
-        }
+            git merge --abort || true  # Aborta o merge se estiver em progresso
+            git reset --hard origin/main
+        fi
     elif [[ -d "$expected_dir" && "$(ls -A "$expected_dir")" ]]; then
         info "O diretório '$expected_dir' já existe e não está vazio. Pulando clonagem."
         cd "$expected_dir"
         git reset --hard
-        git pull --allow-unrelated-histories || {
+        if ! git pull --allow-unrelated-histories; then
             error "Conflitos detectados. Sobrescrevendo com as alterações do repositório remoto."
-            git merge -X theirs
-        }
+            git merge --abort || true  # Aborta o merge se estiver em progresso
+            git reset --hard origin/main
+        fi
     else
         info "Clonando o projeto..."
         echo ""
@@ -119,25 +121,26 @@ elif [[ "$(basename "$current_dir")" == "$expected_dir" ]] || [[ -d "$expected_d
     if [[ "$(basename "$current_dir")" == "$expected_dir" ]]; then
         info "Você já está dentro do diretório '$expected_dir'. Continuando o processo."
         git reset --hard
-        git pull --allow-unrelated-histories || {
+        if ! git pull --allow-unrelated-histories; then
             error "Conflitos detectados. Sobrescrevendo com as alterações do repositório remoto."
-            git merge -X theirs
-        }
+            git merge --abort || true  # Aborta o merge se estiver em progresso
+            git reset --hard origin/main
+        fi
     else
         info "O diretório '$expected_dir' já existe. Continuando o processo."
         cd "$expected_dir"
         git reset --hard
-        git pull --allow-unrelated-histories || {
+        if ! git pull --allow-unrelated-histories; then
             error "Conflitos detectados. Sobrescrevendo com as alterações do repositório remoto."
-            git merge -X theirs
-        }
+            git merge --abort || true  # Aborta o merge se estiver em progresso
+            git reset --hard origin/main
+        fi
     fi
 else
     echo ""
     error "Clone da aplicação cancelada e o diretório não existe! Saindo..."
     exit 1
 fi
-
 
 echo ""
 question "Criar alias no bashrc? (s/n)"
