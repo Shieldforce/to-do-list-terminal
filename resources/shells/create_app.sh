@@ -192,9 +192,9 @@ if [[ "$resposta_2" =~ ^[Ss]$ ]]; then
         source ~/.bashrc
     elif [[ "$resposta_3" =~ ^[Zz]$ ]]; then
         add_aliases_if_not_exist ~/.zshrc
-        exec zsh
+        zsh
         source ~/.zshrc
-        exec bash
+        exit
     else
         error "Entrada inválida! Escolha 'b' para bashrc ou 'z' para zshrc."
     fi
