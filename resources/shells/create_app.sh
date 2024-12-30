@@ -223,6 +223,7 @@ docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* T
 docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%.%.%.%' IDENTIFIED BY '{root}' WITH GRANT OPTION"
 docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'0' IDENTIFIED BY '{root}' WITH GRANT OPTION"
 docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'0.0.0.0' IDENTIFIED BY '{root}' WITH GRANT OPTION"
+docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY '{root}' WITH GRANT OPTION"
 docker exec -it laravel-php-fpm-8.4-8094 mysql -e "FLUSH PRIVILEGES"
 
 echo ""
