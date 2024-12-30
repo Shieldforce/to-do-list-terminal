@@ -212,7 +212,7 @@ docker run --rm \
 
 ./vendor/bin/sail up -d
 
-./vendor/bin/sail artisan migrate --seed
+./vendor/bin/sail artisan migrate:fresh --seed
 
 
 if [[ "$resposta_3" =~ ^[Bb]$ ]]; then
