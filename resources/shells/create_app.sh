@@ -224,17 +224,18 @@ info "Preparando para criar banco de dados! Aguarde são só 10 segundinhos..."
 sleep 10
 docker exec -it laravel-php-fpm-8.4-8094 mysql -e "create database to_do_list_terminal"
 
-docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION"
-docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%.%.%.%' IDENTIFIED BY 'root' WITH GRANT OPTION"
-docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'0' IDENTIFIED BY 'root' WITH GRANT OPTION"
-docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'0.0.0.0' IDENTIFIED BY 'root' WITH GRANT OPTION"
-docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'root' WITH GRANT OPTION"
-docker exec -it laravel-php-fpm-8.4-8094 mysql -e "FLUSH PRIVILEGES"
-
-docker exec -it laravel-php-fpm-8.4-8094 supervisorctl restart all
+docker exec -it laravel-php-fpm-8.4-8094 mysql -u root --password='root' -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION"
+docker exec -it laravel-php-fpm-8.4-8094 mysql -u root --password='root' -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%.%.%.%' IDENTIFIED BY 'root' WITH GRANT OPTION"
+docker exec -it laravel-php-fpm-8.4-8094 mysql -u root --password='root' -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'0' IDENTIFIED BY 'root' WITH GRANT OPTION"
+docker exec -it laravel-php-fpm-8.4-8094 mysql -u root --password='root' -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'0.0.0.0' IDENTIFIED BY 'root' WITH GRANT OPTION"
+docker exec -it laravel-php-fpm-8.4-8094 mysql -u root --password='root' -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'root' WITH GRANT OPTION"
+docker exec -it laravel-php-fpm-8.4-8094 mysql -u root --password='root' -e "FLUSH PRIVILEGES"
 
 echo ""
-info "Serviços que este container subiu!"
+info "Startando serviços do container..."
+docker exec -it laravel-php-fpm-8.4-8094 supervisorctl restart all
+echo ""
+info "Lista dos serviços do container:"
 docker exec -it laravel-php-fpm-8.4-8094 supervisorctl status
 
 echo ""
