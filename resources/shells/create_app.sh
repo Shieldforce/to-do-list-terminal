@@ -216,8 +216,11 @@ git clone
 #
 # ./vendor/bin/sail artisan migrate:fresh --seed
 
-
-
+bash ./vendor/shieldforce/scoob/scoob --type docker-laravel \
+        --version 8.4 \
+        --port 8094 \
+        --redis-port 6394 \
+        --mysql-port 3394
 
 if [[ "$resposta_3" =~ ^[Bb]$ ]]; then
     info "Rode o comando [source ~/.bashrc] no seu terminal!"
