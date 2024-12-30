@@ -155,12 +155,11 @@ if [[ "$resposta_2" =~ ^[Ss]$ ]]; then
         # Define os aliases
         local aliases=(
             "# To Do List Terminal"
-            "alias task.go='cd $current_dir && sail down && sail up -d'"
-            "alias task.list.all='cd $current_dir && sail artisan tdlt:list-task-command all=yes'"
-            "alias task.list='cd $current_dir && sail artisan tdlt:list-task-command all=no'"
-            "alias task.remove='cd $current_dir && sail artisan tdlt:remove-task-command'"
-            "alias task.add='cd $current_dir && sail artisan tdlt:add-task-command'"
-            "alias task.check='cd $current_dir && sail artisan tdlt:check-task-command'"
+            "alias task.list.all='docker exec -it laravel-php-fpm-8.4-8094 php artisan tdlt:list-task-command all=yes'"
+            "alias task.list='docker exec -it laravel-php-fpm-8.4-8094 php artisan tdlt:list-task-command all=no'"
+            "alias task.remove='docker exec -it laravel-php-fpm-8.4-8094 php artisan tdlt:remove-task-command'"
+            "alias task.add='docker exec -it laravel-php-fpm-8.4-8094 php artisan tdlt:add-task-command'"
+            "alias task.check='docker exec -it laravel-php-fpm-8.4-8094 php artisan tdlt:check-task-command'"
         )
 
         local alias_exists=false
@@ -187,7 +186,7 @@ if [[ "$resposta_2" =~ ^[Ss]$ ]]; then
     elif [[ "$resposta_3" =~ ^[Zz]$ ]]; then
         add_aliases_if_not_exist ~/.zshrc
     else
-        error "Entrada inválida! Escolha 'b' para bashrc ou 'z' para zshrc."
+        error "Entrada inválida! Escolha 'b' para bashrc ou 'z' para zshrc. Os aliases não foram criados!"
     fi
 fi
 
