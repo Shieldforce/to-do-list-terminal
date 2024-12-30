@@ -89,6 +89,11 @@ echo ""
 current_dir=$(pwd)
 expected_dir="to-do-list-terminal"
 
+mkdir $expected_dir;
+
+cd $expected_dir;
+exit 0;
+
 if [[ "$resposta_1" =~ ^[Ss]$ ]]; then
     echo ""
     if [[ "$(basename "$current_dir")" == "$expected_dir" ]]; then
@@ -111,7 +116,8 @@ if [[ "$resposta_1" =~ ^[Ss]$ ]]; then
     else
         info "Clonando o projeto..."
         echo ""
-        git clone https://github.com/Shieldforce/to-do-list-terminal.git || cd "$expected_dir"
+        git clone https://github.com/Shieldforce/to-do-list-terminal.git
+        cd "$expected_dir"
         success "Projeto Clonado && Você está na pasta do projeto ($expected_dir)"
     fi
 elif [[ "$(basename "$current_dir")" == "$expected_dir" ]] || [[ -d "$expected_dir" && "$(ls -A "$expected_dir")" ]]; then
@@ -156,7 +162,7 @@ if [[ "$resposta_2" =~ ^[Ss]$ ]]; then
 
         # Define os aliases
         local aliases=(
-            "# To Do Lista Tasks"
+            "# To Do List Terminal"
             "alias task.go='cd $current_dir && sail down && sail up -d'"
             "alias task.list.all='cd $current_dir && sail artisan tdlt:list-task-command all=yes'"
             "alias task.list='cd $current_dir && sail artisan tdlt:list-task-command all=no'"
@@ -186,10 +192,8 @@ if [[ "$resposta_2" =~ ^[Ss]$ ]]; then
     # Verifica se é bashrc ou zshrc
     if [[ "$resposta_3" =~ ^[Bb]$ ]]; then
         add_aliases_if_not_exist ~/.bashrc
-        #source ~/.bashrc
     elif [[ "$resposta_3" =~ ^[Zz]$ ]]; then
         add_aliases_if_not_exist ~/.zshrc
-        #source ~/.zshrc
     else
         error "Entrada inválida! Escolha 'b' para bashrc ou 'z' para zshrc."
     fi
