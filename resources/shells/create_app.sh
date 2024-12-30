@@ -112,6 +112,7 @@ if [[ "$resposta_1" =~ ^[Ss]$ ]]; then
         echo ""
         git clone https://github.com/Shieldforce/to-do-list-terminal.git
         echo ""
+        sleep 2
         cd "$expected_dir"
         success "Projeto Clonado && Você está na pasta do projeto ($expected_dir)"
     fi
