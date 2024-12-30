@@ -228,8 +228,17 @@ docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* T
 docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'root' WITH GRANT OPTION"
 docker exec -it laravel-php-fpm-8.4-8094 mysql -e "FLUSH PRIVILEGES"
 
-echo ""
+docker exec -it laravel-php-fpm-8.4-8094 supervisorctl restart all
 
+echo ""
+info "Serviços que este container subiu!"
+docker exec -it laravel-php-fpm-8.4-8094 supervisorctl status
+
+echo ""
+info "Criando migrates e rodando seed ..."
+docker exec -it laravel-php-fpm-8.4-8094 php artisan migrate:fresh --seed
+
+echo ""
 if [[ "$resposta_3" =~ ^[Bb]$ ]]; then
     info "Rode o comando [source ~/.bashrc] no seu terminal!"
 elif [[ "$resposta_3" =~ ^[Zz]$ ]]; then
