@@ -95,13 +95,13 @@ if [[ "$resposta_1" =~ ^[Ss]$ ]]; then
     # Verificar se já estamos no diretório esperado
     if [[ "$(basename "$current_dir")" == "$expected_dir" ]]; then
         info "Você já está dentro do diretório '$expected_dir'. Pulando clonagem."
-        git config pull.rebase false
+        #git config pull.rebase false
         git reset --hard
         git pull
     elif [[ -d "$expected_dir" && "$(ls -A "$expected_dir")" ]]; then
         info "O diretório '$expected_dir' já existe e não está vazio. Pulando clonagem."
         cd "$expected_dir"
-        git config pull.rebase false
+        #git config pull.rebase false
         git reset --hard
         git pull
     else
@@ -116,13 +116,13 @@ elif [[ "$(basename "$current_dir")" == "$expected_dir" ]] || [[ -d "$expected_d
     # Caso o usuário escolha "não", mas o diretório já exista ou esteja dentro dele
     if [[ "$(basename "$current_dir")" == "$expected_dir" ]]; then
         info "Você já está dentro do diretório '$expected_dir'. Continuando o processo."
-        git config pull.rebase false
+        #git config pull.rebase false
         git reset --hard
         git pull
     else
         info "O diretório '$expected_dir' já existe. Continuando o processo."
         cd "$expected_dir"
-        git config pull.rebase false
+        #git config pull.rebase false
         git reset --hard
         git pull
     fi
