@@ -90,7 +90,7 @@ current_dir=$(pwd)
 expected_dir="to-do-list-terminal"
 
 mkdir $expected_dir;
-
+chmod +x $expected_dir;
 cd $expected_dir;
 exit 0;
 
