@@ -92,18 +92,21 @@ expected_dir="to-do-list-terminal"
 
 if [[ "$resposta_1" =~ ^[Ss]$ ]]; then
     echo ""
-    # Verificar se já estamos no diretório esperado
     if [[ "$(basename "$current_dir")" == "$expected_dir" ]]; then
         info "Você já está dentro do diretório '$expected_dir'. Pulando clonagem."
-        #git config pull.rebase false
         git reset --hard
-        git pull --allow-unrelated-histories
+        git pull --allow-unrelated-histories || {
+            error "Conflitos detectados. Sobrescrevendo com as alterações do repositório remoto."
+            git merge -X theirs
+        }
     elif [[ -d "$expected_dir" && "$(ls -A "$expected_dir")" ]]; then
         info "O diretório '$expected_dir' já existe e não está vazio. Pulando clonagem."
         cd "$expected_dir"
-        #git config pull.rebase false
         git reset --hard
-        git pull --allow-unrelated-histories
+        git pull --allow-unrelated-histories || {
+            error "Conflitos detectados. Sobrescrevendo com as alterações do repositório remoto."
+            git merge -X theirs
+        }
     else
         info "Clonando o projeto..."
         echo ""
@@ -113,25 +116,28 @@ if [[ "$resposta_1" =~ ^[Ss]$ ]]; then
         success "Projeto Clonado && Você está na pasta do projeto ($expected_dir)"
     fi
 elif [[ "$(basename "$current_dir")" == "$expected_dir" ]] || [[ -d "$expected_dir" && "$(ls -A "$expected_dir")" ]]; then
-    # Caso o usuário escolha "não", mas o diretório já exista ou esteja dentro dele
     if [[ "$(basename "$current_dir")" == "$expected_dir" ]]; then
         info "Você já está dentro do diretório '$expected_dir'. Continuando o processo."
-        #git config pull.rebase false
         git reset --hard
-        git pull --allow-unrelated-histories
+        git pull --allow-unrelated-histories || {
+            error "Conflitos detectados. Sobrescrevendo com as alterações do repositório remoto."
+            git merge -X theirs
+        }
     else
         info "O diretório '$expected_dir' já existe. Continuando o processo."
         cd "$expected_dir"
-        #git config pull.rebase false
         git reset --hard
-        git pull --allow-unrelated-histories
+        git pull --allow-unrelated-histories || {
+            error "Conflitos detectados. Sobrescrevendo com as alterações do repositório remoto."
+            git merge -X theirs
+        }
     fi
 else
-    # Caso o usuário escolha "não" e o diretório não exista
     echo ""
     error "Clone da aplicação cancelada e o diretório não existe! Saindo..."
     exit 1
 fi
+
 
 echo ""
 question "Criar alias no bashrc? (s/n)"
