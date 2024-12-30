@@ -204,6 +204,8 @@ fi
 echo ""
 info "Baixando pacotes composer..."
 
+cp .env.example .env
+
 docker run --rm \
     -u "$(id -u):$(id -g)" \
     -v "$(pwd):/var/www/html" \
@@ -211,6 +213,4 @@ docker run --rm \
     laravelsail/php84-composer:latest \
     composer install --ignore-platform-reqs
 
-alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
-
-sail up -d
+./vendor/bin/sail up -d
