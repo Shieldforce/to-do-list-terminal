@@ -220,6 +220,10 @@ bash ./vendor/shieldforce/scoob/scoob --type docker-laravel \
         --redis-port 6394 \
         --mysql-port 3394
 
+echo ""
+info "Preparando para criar banco de dados!"
+sleep 30
+
 docker exec -it laravel-php-fpm-8.4-8094 mysql -e "create database to_do_list_terminal"
 
 if [[ "$resposta_3" =~ ^[Bb]$ ]]; then
