@@ -194,6 +194,7 @@ if [[ "$resposta_2" =~ ^[Ss]$ ]]; then
         add_aliases_if_not_exist ~/.zshrc
         exec zsh
         source ~/.zshrc
+        exec bash
     else
         error "Entrada inválida! Escolha 'b' para bashrc ou 'z' para zshrc."
     fi
