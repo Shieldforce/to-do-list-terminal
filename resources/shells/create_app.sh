@@ -136,8 +136,6 @@ elif [[ "$(basename "$current_dir")" == "$expected_dir" ]] || [[ -d "$expected_d
 else
     echo ""
     error "Clone da aplicação cancelada e o diretório não existe! Saindo...";
-    mkdir "$expected_dir";
-    cd "$expected_dir";
     exit 1
 fi
 
