@@ -115,7 +115,7 @@ if [[ "$resposta_1" =~ ^[Ss]$ ]]; then
             error "Falha ao clonar o repositório. Diretório '$expected_dir' não foi criado."
             exit 1
         fi
-        cd "$expected_dir" || { error "Não foi possível entrar no diretório '$expected_dir'."; exit 1; }
+        cd "to-do-list-terminal" || { error "Não foi possível entrar no diretório '$expected_dir'."; exit 1; }
         success "Projeto Clonado && Você está na pasta do projeto ($expected_dir)"
     fi
 elif [[ "$(basename "$current_dir")" == "$expected_dir" ]] || [[ -d "$expected_dir" && "$(ls -A "$expected_dir")" ]]; then
