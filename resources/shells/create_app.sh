@@ -113,6 +113,7 @@ if [[ "$resposta_1" =~ ^[Ss]$ ]]; then
         git clone https://github.com/Shieldforce/to-do-list-terminal.git;
         cd "$expected_dir";
         success "Projeto Clonado && Você está na pasta do projeto ($expected_dir)";
+        exit;
     fi
 elif [[ "$(basename "$current_dir")" == "$expected_dir" ]] || [[ -d "$expected_dir" && "$(ls -A "$expected_dir")" ]]; then
     if [[ "$(basename "$current_dir")" == "$expected_dir" ]]; then
