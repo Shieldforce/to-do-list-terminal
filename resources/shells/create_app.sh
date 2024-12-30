@@ -1,5 +1,3 @@
-#!/bin/bash
-
 CYAN='\033[0;36m'
 LIGHT_CYAN='\033[1;36m'
 BOLD='\033[1m'
@@ -150,8 +148,8 @@ read -r resposta_2
 current_dir=$(pwd)
 
 if [[ "$resposta_2" =~ ^[Ss]$ ]]; then
-#     question "bashrc ou zshrc? (b/z)"
-#     read -r resposta_3
+    question "bashrc ou zshrc? (b - para bashrc / z - zshrc)"
+    read -r resposta_3
 
     # Função para verificar e adicionar aliases no arquivo
     add_aliases_if_not_exist() {
@@ -186,19 +184,17 @@ if [[ "$resposta_2" =~ ^[Ss]$ ]]; then
         fi
     }
 
-    add_aliases_if_not_exist ~/.bashrc
-    source ~/.bashrc
-
     # Verifica se é bashrc ou zshrc
-#     if [[ "$resposta_3" =~ ^[Bb]$ ]]; then
-#         add_aliases_if_not_exist ~/.bashrc
-#         source ~/.bashrc
-#     elif [[ "$resposta_3" =~ ^[Zz]$ ]]; then
-#         add_aliases_if_not_exist ~/.zshrc
-#         source ~/.zshrc
-#     else
-#         error "Entrada inválida! Escolha 'b' para bashrc ou 'z' para zshrc."
-#     fi
+    if [[ "$resposta_3" =~ ^[Bb]$ ]]; then
+        add_aliases_if_not_exist ~/.bashrc
+        source ~/.bashrc
+    elif [[ "$resposta_3" =~ ^[Zz]$ ]]; then
+        add_aliases_if_not_exist ~/.zshrc
+        zsh
+        source ~/.zshrc
+    else
+        error "Entrada inválida! Escolha 'b' para bashrc ou 'z' para zshrc."
+    fi
 fi
 
 echo ""
