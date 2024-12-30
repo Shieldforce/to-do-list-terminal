@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Group;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -21,6 +22,8 @@ class GroupSeeder extends Seeder
             ["name" => "Semestral"],
         ];
 
-        DB::table('groups')->insert($groups);
+        foreach ($groups as $group) {
+            Group::updateOrCreate(["name" => $group["name"]], []);
+        }
     }
 }
