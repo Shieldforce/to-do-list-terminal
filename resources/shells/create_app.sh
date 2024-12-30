@@ -187,10 +187,10 @@ if [[ "$resposta_2" =~ ^[Ss]$ ]]; then
     # Verifica se é bashrc ou zshrc
     if [[ "$resposta_3" =~ ^[Bb]$ ]]; then
         add_aliases_if_not_exist ~/.bashrc
-        source ~/.bashrc
+        #source ~/.bashrc
     elif [[ "$resposta_3" =~ ^[Zz]$ ]]; then
         add_aliases_if_not_exist ~/.zshrc
-        source ~/.zshrc
+        #source ~/.zshrc
     else
         error "Entrada inválida! Escolha 'b' para bashrc ou 'z' para zshrc."
     fi
@@ -213,3 +213,10 @@ docker run --rm \
 ./vendor/bin/sail up -d
 
 ./vendor/bin/sail artisan migrate --seed
+
+
+if [[ "$resposta_3" =~ ^[Bb]$ ]]; then
+    info "Rode o comando [source ~/.bashrc] no seu terminal!"
+elif [[ "$resposta_3" =~ ^[Zz]$ ]]; then
+    info "Rode o comando [source ~/.zshrc] no seu terminal!"
+fi
