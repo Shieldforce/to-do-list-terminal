@@ -97,13 +97,13 @@ if [[ "$resposta_1" =~ ^[Ss]$ ]]; then
         info "Você já está dentro do diretório '$expected_dir'. Pulando clonagem."
         #git config pull.rebase false
         git reset --hard
-        git pull
+        git pull --allow-unrelated-histories
     elif [[ -d "$expected_dir" && "$(ls -A "$expected_dir")" ]]; then
         info "O diretório '$expected_dir' já existe e não está vazio. Pulando clonagem."
         cd "$expected_dir"
         #git config pull.rebase false
         git reset --hard
-        git pull
+        git pull --allow-unrelated-histories
     else
         info "Clonando o projeto..."
         echo ""
@@ -118,13 +118,13 @@ elif [[ "$(basename "$current_dir")" == "$expected_dir" ]] || [[ -d "$expected_d
         info "Você já está dentro do diretório '$expected_dir'. Continuando o processo."
         #git config pull.rebase false
         git reset --hard
-        git pull
+        git pull --allow-unrelated-histories
     else
         info "O diretório '$expected_dir' já existe. Continuando o processo."
         cd "$expected_dir"
         #git config pull.rebase false
         git reset --hard
-        git pull
+        git pull --allow-unrelated-histories
     fi
 else
     # Caso o usuário escolha "não" e o diretório não exista
