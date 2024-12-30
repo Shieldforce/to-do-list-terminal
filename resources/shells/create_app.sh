@@ -218,12 +218,14 @@ bash ./vendor/shieldforce/scoob/scoob --type docker-laravel \
 info "Preparando para criar banco de dados! Aguarde são só 10 segundinhos..."
 sleep 10
 
+scoob --type docker-remove laravel-php-fpm-8.4-8094
+
 docker exec -it laravel-php-fpm-8.4-8094 mysql -e "create database to_do_list_terminal"
-docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '{root}' WITH GRANT OPTION"
-docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%.%.%.%' IDENTIFIED BY '{root}' WITH GRANT OPTION"
-docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'0' IDENTIFIED BY '{root}' WITH GRANT OPTION"
-docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'0.0.0.0' IDENTIFIED BY '{root}' WITH GRANT OPTION"
-docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY '{root}' WITH GRANT OPTION"
+docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION"
+docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%.%.%.%' IDENTIFIED BY 'root' WITH GRANT OPTION"
+docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'0' IDENTIFIED BY 'root' WITH GRANT OPTION"
+docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'0.0.0.0' IDENTIFIED BY 'root' WITH GRANT OPTION"
+docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'root' WITH GRANT OPTION"
 docker exec -it laravel-php-fpm-8.4-8094 mysql -e "FLUSH PRIVILEGES"
 
 echo ""
