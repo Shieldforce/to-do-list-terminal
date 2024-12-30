@@ -217,10 +217,13 @@ bash ./vendor/shieldforce/scoob/scoob --type docker-laravel \
         --redis-port 6394 \
         --mysql-port 3394
 
+info "Instalando e ativando horizon..."
+docker exec -it laravel-php-fpm-8.4-8094 php artisan horizon:install
+
 info "Preparando para criar banco de dados! Aguarde são só 10 segundinhos..."
 sleep 10
-
 docker exec -it laravel-php-fpm-8.4-8094 mysql -e "create database to_do_list_terminal"
+
 docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION"
 docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%.%.%.%' IDENTIFIED BY 'root' WITH GRANT OPTION"
 docker exec -it laravel-php-fpm-8.4-8094 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'0' IDENTIFIED BY 'root' WITH GRANT OPTION"
