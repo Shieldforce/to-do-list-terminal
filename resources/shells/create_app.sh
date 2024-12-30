@@ -208,8 +208,6 @@ docker run --rm \
     laravelsail/php84-composer:latest \
     composer install --ignore-platform-reqs
 
-git clone
-
 # ./vendor/bin/sail down
 #
 # ./vendor/bin/sail up -d
