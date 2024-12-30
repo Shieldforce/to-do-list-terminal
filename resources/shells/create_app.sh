@@ -90,56 +90,17 @@ current_dir=$(pwd)
 expected_dir="to-do-list-terminal"
 
 if [[ "$resposta_1" =~ ^[Ss]$ ]]; then
-    echo ""
-    if [[ "$(basename "$current_dir")" == "$expected_dir" ]]; then
-        info "Você já está dentro do diretório '$expected_dir'. Pulando clonagem."
-        git reset --hard
-        if ! git pull --allow-unrelated-histories; then
-            error "Conflitos detectados. Sobrescrevendo com as alterações do repositório remoto."
-            git merge --abort || true
-            git reset --hard origin/main
-        fi
-    elif [[ -d "$expected_dir" && "$(ls -A "$expected_dir")" ]]; then
-        info "O diretório '$expected_dir' já existe e não está vazio. Pulando clonagem."
-        cd "$expected_dir"
-        git reset --hard
-        if ! git pull --allow-unrelated-histories; then
-            error "Conflitos detectados. Sobrescrevendo com as alterações do repositório remoto."
-            git merge --abort || true
-            git reset --hard origin/main
-        fi
-    else
-        info "Clonando o projeto..."
-        echo ""
-        git clone https://github.com/Shieldforce/to-do-list-terminal.git
-        success "Projeto Clonado && Você está na pasta do projeto ($expected_dir)"
-    fi
-elif [[ "$(basename "$current_dir")" == "$expected_dir" ]] || [[ -d "$expected_dir" && "$(ls -A "$expected_dir")" ]]; then
-    if [[ "$(basename "$current_dir")" == "$expected_dir" ]]; then
-        info "Você já está dentro do diretório '$expected_dir'. Continuando o processo."
-        git reset --hard
-        if ! git pull --allow-unrelated-histories; then
-            error "Conflitos detectados. Sobrescrevendo com as alterações do repositório remoto."
-            git merge --abort || true
-            git reset --hard origin/main
-        fi
-    else
-        info "O diretório '$expected_dir' já existe. Continuando o processo."
-        cd "$expected_dir"
-        git reset --hard
-        if ! git pull --allow-unrelated-histories; then
-            error "Conflitos detectados. Sobrescrevendo com as alterações do repositório remoto."
-            git merge --abort || true
-            git reset --hard origin/main
-        fi
-    fi
-else
-    echo ""
-    error "Clone da aplicação cancelada e o diretório não existe! Saindo..."
-    exit 1
-fi
-
+echo ""
+info "Clonando o projeto..."
+echo ""
+git clone https://github.com/Shieldforce/to-do-list-terminal.git
 cd "$expected_dir"
+success "Projeto Clonado && Você está na pasta do projeto ($expected_dir)"
+else
+echo ""
+error "Clone da aplicação cancelada e o diretório não existe! Saindo..."
+exit 1
+fi
 
 echo ""
 question "Criar alias no bashrc? (s/n)"
