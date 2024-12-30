@@ -79,12 +79,11 @@ question() {
 }
 
 echo ""
-# Perguntar se deseja clonar o repositório
+
 question "Clonar aplicação To Do List Terminal? (s/n)"
 read -r resposta_1
 echo ""
 
-# Diretório esperado
 current_dir=$(pwd)
 expected_dir="to-do-list-terminal"
 
@@ -100,7 +99,7 @@ if [[ "$resposta_1" =~ ^[Ss]$ ]]; then
         fi
     elif [[ -d "$expected_dir" && "$(ls -A "$expected_dir")" ]]; then
         info "O diretório '$expected_dir' já existe e não está vazio. Pulando clonagem."
-        cd "$expected_dir" || { error "Falha ao entrar no diretório '$expected_dir'."; exit 1; }
+        cd "$expected_dir"
         git reset --hard
         if ! git pull --allow-unrelated-histories; then
             error "Conflitos detectados. Sobrescrevendo com as alterações do repositório remoto."
@@ -110,15 +109,12 @@ if [[ "$resposta_1" =~ ^[Ss]$ ]]; then
     else
         info "Clonando o projeto..."
         echo ""
-        git clone https://github.com/Shieldforce/to-do-list-terminal.git
+        mkdir $expected_dir
+        cd "$expected_dir"
 
-        sleep 5
+        sleep 1
+        git clone https://github.com/Shieldforce/to-do-list-terminal.git ./
 
-        if [[ ! -d "$expected_dir" ]]; then
-            error "Falha ao clonar o repositório. Diretório '$expected_dir' não foi criado."
-            exit 1
-        fi
-        cd "$expected_dir" || { error "Não foi possível entrar no diretório '$expected_dir'."; exit 1; }
         success "Projeto Clonado && Você está na pasta do projeto ($expected_dir)"
     fi
 elif [[ "$(basename "$current_dir")" == "$expected_dir" ]] || [[ -d "$expected_dir" && "$(ls -A "$expected_dir")" ]]; then
@@ -132,7 +128,7 @@ elif [[ "$(basename "$current_dir")" == "$expected_dir" ]] || [[ -d "$expected_d
         fi
     else
         info "O diretório '$expected_dir' já existe. Continuando o processo."
-        cd "$expected_dir" || { error "Falha ao entrar no diretório '$expected_dir'."; exit 1; }
+        cd "$expected_dir"
         git reset --hard
         if ! git pull --allow-unrelated-histories; then
             error "Conflitos detectados. Sobrescrevendo com as alterações do repositório remoto."
