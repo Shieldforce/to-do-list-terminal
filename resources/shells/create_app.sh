@@ -213,4 +213,8 @@ docker run --rm \
     laravelsail/php84-composer:latest \
     composer install --ignore-platform-reqs
 
+./vendor/bin/sail down
+
 ./vendor/bin/sail up -d
+
+./vendor/bin/sail artisan migrate --seed
