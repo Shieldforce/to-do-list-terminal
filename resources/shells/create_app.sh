@@ -111,11 +111,14 @@ if [[ "$resposta_1" =~ ^[Ss]$ ]]; then
         info "Clonando o projeto..."
         echo ""
         git clone https://github.com/Shieldforce/to-do-list-terminal.git
+
+        sleep 5
+
         if [[ ! -d "$expected_dir" ]]; then
             error "Falha ao clonar o repositório. Diretório '$expected_dir' não foi criado."
             exit 1
         fi
-        cd "to-do-list-terminal" || { error "Não foi possível entrar no diretório '$expected_dir'."; exit 1; }
+        cd "$expected_dir" || { error "Não foi possível entrar no diretório '$expected_dir'."; exit 1; }
         success "Projeto Clonado && Você está na pasta do projeto ($expected_dir)"
     fi
 elif [[ "$(basename "$current_dir")" == "$expected_dir" ]] || [[ -d "$expected_dir" && "$(ls -A "$expected_dir")" ]]; then
