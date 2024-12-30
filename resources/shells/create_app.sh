@@ -81,18 +81,12 @@ question() {
 }
 
 echo ""
-
 question "Clonar aplicação To Do List Terminal? (s/n)"
 read -r resposta_1
 echo ""
 
 current_dir=$(pwd)
 expected_dir="to-do-list-terminal"
-
-mkdir $expected_dir;
-chmod -R 777 $expected_dir;
-cd $current_dir/$expected_dir/;
-exit 0;
 
 if [[ "$resposta_1" =~ ^[Ss]$ ]]; then
     echo ""
@@ -147,10 +141,8 @@ fi
 
 echo ""
 question "Criar alias no bashrc? (s/n)"
-
 read -r resposta_2
-
-current_dir=$(pwd)
+echo ""
 
 if [[ "$resposta_2" =~ ^[Ss]$ ]]; then
     question "bashrc ou zshrc? (b - para bashrc / z - zshrc)"
