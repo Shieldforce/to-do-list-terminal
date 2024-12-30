@@ -4,6 +4,8 @@
 ### Pacotes usados:
  - (Scoob)[https://github.com/Shieldforce/scoob]
 
+### App irá utiliza as postas: 8094, 6394, 3394
+
 ### Para baixar o app e rodar ele localmente:
 
 ```
