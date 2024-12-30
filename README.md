@@ -1,5 +1,8 @@
 ### Requisitos mínimos:
- - Docker 
+ - Docker
+
+### Pacotes usados:
+ - (Scoob)[https://github.com/Shieldforce/scoob]
 
 ### Para criar os comandos no seu bashrc ou zshrc, faça assim:
 
