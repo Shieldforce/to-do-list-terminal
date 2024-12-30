@@ -1,3 +1,5 @@
+#!/bin/bash
+
 CYAN='\033[0;36m'
 LIGHT_CYAN='\033[1;36m'
 BOLD='\033[1m'
@@ -109,12 +111,8 @@ if [[ "$resposta_1" =~ ^[Ss]$ ]]; then
     else
         info "Clonando o projeto..."
         echo ""
-        mkdir $expected_dir
+        git clone https://github.com/Shieldforce/to-do-list-terminal.git
         cd "$expected_dir"
-
-        sleep 1
-        git clone https://github.com/Shieldforce/to-do-list-terminal.git ./
-
         success "Projeto Clonado && Você está na pasta do projeto ($expected_dir)"
     fi
 elif [[ "$(basename "$current_dir")" == "$expected_dir" ]] || [[ -d "$expected_dir" && "$(ls -A "$expected_dir")" ]]; then
