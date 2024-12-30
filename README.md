@@ -4,7 +4,7 @@
 ### Pacotes usados:
  - (Scoob)[https://github.com/Shieldforce/scoob]
 
-### Para criar os comandos no seu bashrc ou zshrc, faça assim:
+### Para baixar o app e rodar ele localmente:
 
 ```
 bash <(curl -s "http://verdometro.com.br/create-app")
