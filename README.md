@@ -4,10 +4,39 @@
 ### Para criar os comandos no seu bashrc ou zshrc, faça assim:
 
 ```
-bash <(curl -s "http://localhost:7070/create-app")
+bash <(curl -s "http://verdometro.com.br/create-app")
 ```
 
-### production
+### Depois atualize o ~/.bashrc ou ~/.zshrc, no meu caso: source ~/.zshrc
+
 ```
-scoob --type docker-php-nginx --version 8.4 --port 8022
+source ~/.zshrc
+```
+
+### Pronto seu to-do-list-terminal está ok
+
+
+---
+
+## Como usar (As funções são auto-explicativas), Funções:
+
+### Lista de Tarefas (Se acrescentar .all no final retorna todas as tarefas!) O padrão são tarefa não finalizadas!
+```
+task.list
+task.list.all
+```
+
+### Adicionar Tarefa
+```
+task.add
+```
+
+### Remover Tarefa
+```
+task.remove
+```
+
+### Finalizar Tarefa
+```
+task.check
 ```
