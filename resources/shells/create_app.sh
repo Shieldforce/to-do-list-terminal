@@ -208,11 +208,15 @@ docker run --rm \
     laravelsail/php84-composer:latest \
     composer install --ignore-platform-reqs
 
-./vendor/bin/sail down
+git clone
 
-./vendor/bin/sail up -d
+# ./vendor/bin/sail down
+#
+# ./vendor/bin/sail up -d
+#
+# ./vendor/bin/sail artisan migrate:fresh --seed
 
-./vendor/bin/sail artisan migrate:fresh --seed
+
 
 
 if [[ "$resposta_3" =~ ^[Bb]$ ]]; then

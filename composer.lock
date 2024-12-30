@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6b071dceee378ecdfa129134a8b0e1ea",
+    "content-hash": "1442c3d529bc1f088506d1352339d176",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -3624,6 +3624,43 @@
                 }
             ],
             "time": "2024-04-27T21:32:50+00:00"
+        },
+        {
+            "name": "shieldforce/scoob",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Shieldforce/scoob.git",
+                "reference": "658349cc8eec2a7f07c9707685729e561d55e917"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Shieldforce/scoob/zipball/658349cc8eec2a7f07c9707685729e561d55e917",
+                "reference": "658349cc8eec2a7f07c9707685729e561d55e917",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Shieldforce\\Scoob\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexandre Ferreira",
+                    "email": "shieldforce2@gmail.com"
+                }
+            ],
+            "description": "Pacote para gerar containers rápidos",
+            "support": {
+                "issues": "https://github.com/Shieldforce/scoob/issues",
+                "source": "https://github.com/Shieldforce/scoob/tree/v2.0.0"
+            },
+            "time": "2024-12-27T23:47:37+00:00"
         },
         {
             "name": "symfony/clock",
@@ -9337,12 +9374,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
