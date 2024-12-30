@@ -150,8 +150,8 @@ read -r resposta_2
 current_dir=$(pwd)
 
 if [[ "$resposta_2" =~ ^[Ss]$ ]]; then
-    question "bashrc ou zshrc? (b/z)"
-    read -r resposta_3
+#     question "bashrc ou zshrc? (b/z)"
+#     read -r resposta_3
 
     # Função para verificar e adicionar aliases no arquivo
     add_aliases_if_not_exist() {
@@ -186,19 +186,23 @@ if [[ "$resposta_2" =~ ^[Ss]$ ]]; then
         fi
     }
 
+    add_aliases_if_not_exist ~/.bashrc
+    source ~/.bashrc
+
     # Verifica se é bashrc ou zshrc
-    if [[ "$resposta_3" =~ ^[Bb]$ ]]; then
-        add_aliases_if_not_exist ~/.bashrc
-        source ~/.bashrc
-    elif [[ "$resposta_3" =~ ^[Zz]$ ]]; then
-        add_aliases_if_not_exist ~/.zshrc
-        zsh
-        source ~/.zshrc
-        exit
-    else
-        error "Entrada inválida! Escolha 'b' para bashrc ou 'z' para zshrc."
-    fi
+#     if [[ "$resposta_3" =~ ^[Bb]$ ]]; then
+#         add_aliases_if_not_exist ~/.bashrc
+#         source ~/.bashrc
+#     elif [[ "$resposta_3" =~ ^[Zz]$ ]]; then
+#         add_aliases_if_not_exist ~/.zshrc
+#         source ~/.zshrc
+#     else
+#         error "Entrada inválida! Escolha 'b' para bashrc ou 'z' para zshrc."
+#     fi
 fi
+
+echo ""
+info "Baixando pacotes composer..."
 
 docker run --rm \
     -u "$(id -u):$(id -g)" \
@@ -206,3 +210,7 @@ docker run --rm \
     -w /var/www/html \
     laravelsail/php84-composer:latest \
     composer install --ignore-platform-reqs
+
+alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
+
+sail up -d
