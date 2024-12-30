@@ -91,7 +91,7 @@ expected_dir="to-do-list-terminal"
 
 mkdir $expected_dir;
 chmod -R 777 $expected_dir;
-cd $expected_dir;
+cd $expected_dir/;
 exit 0;
 
 if [[ "$resposta_1" =~ ^[Ss]$ ]]; then
