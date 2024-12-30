@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 CYAN='\033[0;36m'
 LIGHT_CYAN='\033[1;36m'
