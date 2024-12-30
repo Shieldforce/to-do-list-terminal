@@ -95,23 +95,27 @@ if [[ "$resposta_1" =~ ^[Ss]$ ]]; then
         git reset --hard
         if ! git pull --allow-unrelated-histories; then
             error "Conflitos detectados. Sobrescrevendo com as alterações do repositório remoto."
-            git merge --abort || true  # Aborta o merge se estiver em progresso
+            git merge --abort || true
             git reset --hard origin/main
         fi
     elif [[ -d "$expected_dir" && "$(ls -A "$expected_dir")" ]]; then
         info "O diretório '$expected_dir' já existe e não está vazio. Pulando clonagem."
-        cd "$expected_dir"
+        cd "$expected_dir" || { error "Falha ao entrar no diretório '$expected_dir'."; exit 1; }
         git reset --hard
         if ! git pull --allow-unrelated-histories; then
             error "Conflitos detectados. Sobrescrevendo com as alterações do repositório remoto."
-            git merge --abort || true  # Aborta o merge se estiver em progresso
+            git merge --abort || true
             git reset --hard origin/main
         fi
     else
         info "Clonando o projeto..."
         echo ""
-        git clone https://github.com/Shieldforce/to-do-list-terminal.git && cd "$expected_dir"
-        echo ""
+        git clone https://github.com/Shieldforce/to-do-list-terminal.git
+        if [[ ! -d "$expected_dir" ]]; then
+            error "Falha ao clonar o repositório. Diretório '$expected_dir' não foi criado."
+            exit 1
+        fi
+        cd "$expected_dir" || { error "Não foi possível entrar no diretório '$expected_dir'."; exit 1; }
         success "Projeto Clonado && Você está na pasta do projeto ($expected_dir)"
     fi
 elif [[ "$(basename "$current_dir")" == "$expected_dir" ]] || [[ -d "$expected_dir" && "$(ls -A "$expected_dir")" ]]; then
@@ -120,16 +124,16 @@ elif [[ "$(basename "$current_dir")" == "$expected_dir" ]] || [[ -d "$expected_d
         git reset --hard
         if ! git pull --allow-unrelated-histories; then
             error "Conflitos detectados. Sobrescrevendo com as alterações do repositório remoto."
-            git merge --abort || true  # Aborta o merge se estiver em progresso
+            git merge --abort || true
             git reset --hard origin/main
         fi
     else
         info "O diretório '$expected_dir' já existe. Continuando o processo."
-        cd "$expected_dir"
+        cd "$expected_dir" || { error "Falha ao entrar no diretório '$expected_dir'."; exit 1; }
         git reset --hard
         if ! git pull --allow-unrelated-histories; then
             error "Conflitos detectados. Sobrescrevendo com as alterações do repositório remoto."
-            git merge --abort || true  # Aborta o merge se estiver em progresso
+            git merge --abort || true
             git reset --hard origin/main
         fi
     fi
